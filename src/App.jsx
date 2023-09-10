@@ -23,7 +23,7 @@ function App() {
         </header>
         <main>
           <Routes>
-            {/* add a home component to the path below when ready */}
+            {/* add a home route to the path below when ready */}
             <Route path='/' />
             <Route path='/premiums' element={<Premiums />} />
             <Route path='/tours' element={<Tours />} />
