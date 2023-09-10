@@ -5,12 +5,23 @@ export default function Tours() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:4005/api/Guests')
-            const json = await response.json()
-            setGuests(json)
-        }
-        fetchData()
-    }, [])
+            try {
+                const response = await fetch('http://localhost:4005/api/Guests');
+                
+                if (!response.ok) {
+                    console.error(`Server responded with ${response.status}: ${response.statusText}`);
+                    return;
+                }
+    
+                const json = await response.json();
+                setGuests(json);
+            } catch (error) {
+                console.error(`Fetch failed: ${error.message}`);
+            }
+        };
+        fetchData();
+    }, []);
+    
 
     return (
         <div> 

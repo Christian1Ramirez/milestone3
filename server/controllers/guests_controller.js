@@ -2,7 +2,7 @@ const Guests = require('express').Router()
 const db = require('../models')
 const { Guest } = db
 
-// GET ALL BOOKS
+// GET ALL GUESTS
 Guests.get('/', async (req, res) => {
     try {
         const foundGuests = await Guest.findAll()
