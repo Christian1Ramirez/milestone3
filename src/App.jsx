@@ -1,8 +1,12 @@
 import './App.css';
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from './components/Navbar'; 
+import Home from './components/Home';
 import Premiums from './components/Premiums';
 import Tours from './components/Tours';
 import Login from './components/Login';
+import Logout from './components/Logout'
+import SignUp from './components/SignUp';
 
 
 function App() {
@@ -10,17 +14,16 @@ function App() {
     <div className="App">
       <Router>
         <header>
-          <ul>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/premiums'>Premiums</Link></li>
-            <li><Link to='/tours'>Tours</Link></li>
-          </ul>
+          <Navbar /> 
         </header>
         <main>
           <Routes>
-            <Route path='/' element={<Login />} /> 
+            <Route path='/home' element={<Home />} />
             <Route path='/premiums' element={<Premiums />} />
             <Route path='/tours' element={<Tours />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
+            <Route path='/signup' element={<SignUp />} />
           </Routes>
         </main>
       </Router>

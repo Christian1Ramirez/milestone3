@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, '../build')))
 const guestsController = require('./controllers/guests_controller');
 app.use('/api/Guests', guestsController)
 
+
 // LISTEN
 app.listen(4005, () => {
   console.log("Server is running on port 4005");
