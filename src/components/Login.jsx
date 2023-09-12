@@ -1,26 +1,29 @@
-import React from 'react';
-import { Link } from "react-router-dom"; 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import supabase from '../services/supabaseClient';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) console.log("Login Error:", error);
+    else console.log("Login Success:", data);
+  };
+
   return (
     <div>
       <h1>Login</h1>
-      <form>
-        <label>
-          Username:
-          <input type="text" name="username" />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" name="password" />
-        </label>
-        <br />
-        <input type="submit" value="Login" />
+      <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+      <button onClick={handleLogin}>Login</button>
         <p>
-       Don't have an account? <Link to="/signup">Sign Up</Link>
-      </p>
-      </form>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
     </div>
   );
 }
