@@ -7,12 +7,10 @@ export default function Tours() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Initialize authentication listener
     const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
       const user = session?.user;
 
       if (user) {
-        // Fetch the guests data
         try {
           const response = await fetch('http://localhost:4005/api/Guests');
           if (!response.ok) {
@@ -25,13 +23,11 @@ export default function Tours() {
           console.error(`Fetch failed: ${error.message}`);
         }
       } else {
-        // Redirect to login page if the user is not logged in
         navigate('/login');
       }
     });
 
     return () => {
-      // Cleanup
       if (authListener && typeof authListener.unsubscribe === 'function') {
         authListener.unsubscribe();
       }

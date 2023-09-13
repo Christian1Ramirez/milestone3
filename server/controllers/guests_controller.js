@@ -13,4 +13,23 @@ Guests.get('/', async (req, res) => {
     }
 })
 
+// DELETE GUEST
+Guests.delete('/:guest_id', async (req, res) => {
+    try {
+      const deletedGuest = await Guest.destroy({
+        where: {
+          guest_id: req.params.guest_id
+        }
+      });
+      if (deletedGuest === 1) {
+        res.status(200).send("Guest deleted successfully");
+      } else {
+        res.status(404).send("Guest not found");
+      }
+    } catch (err) {
+      res.status(500).send("Server error");
+      console.log(err);
+    }
+  });
+
 module.exports = Guests
