@@ -8,12 +8,12 @@ function Logout() {
       console.log("Logout Error:", error);
     } else {
         window.alert("You have successfully logged out!");
-        window.location.href = "/home";
+        window.location.href = "/";
        }
     };
 
   return (
-    <div>
+    <div>               
       <h1>Logout</h1>
       <button onClick={handleLogout}>Logout Now</button>
     </div>

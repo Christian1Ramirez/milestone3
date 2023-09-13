@@ -6,7 +6,7 @@ function Navbar() {
     <header>
      <ul>
       <li>
-       <Link to="/home">Home</Link>
+       <Link to="/">Home</Link>
       </li>
       <li>
        <Link to="/premiums">Premiums</Link>
