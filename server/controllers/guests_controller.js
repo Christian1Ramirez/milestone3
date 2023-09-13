@@ -13,16 +13,31 @@ Guests.get('/', async (req, res) => {
     }
 })
 
+// GET SINGLE GUEST
+Guests.get('/:guest_id', async (req, res) => {
+    try {
+        const guest = await Guest.findByPk(req.params.guest_id);
+        if (guest) {
+            res.status(200).json(guest);
+        } else {
+            res.status(404).send("Guest not found");
+        }
+    } catch (err) {
+        res.status(500).send("Server error");
+        console.log(err);
+    }
+});
+
 // CREATE NEW GUEST
 Guests.post('/', async (req, res) => {
     try {
-      const newGuest = await Guest.create(req.body);
-      res.status(201).json(newGuest);
+        const newGuest = await Guest.create(req.body);
+        res.status(201).json(newGuest);
     } catch (err) {
-      res.status(500).send("Server error");
-      console.log(err);
+        res.status(500).send("Server error");
+        console.log(err);
     }
-  });
+});
 
 // UPDATE GUEST
 Guests.put('/:guest_id', async (req, res) => {
