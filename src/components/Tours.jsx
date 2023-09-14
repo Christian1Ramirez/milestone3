@@ -6,6 +6,19 @@ export default function Tours() {
   const [Guests, setGuests] = useState([]);
   const navigate = useNavigate();
 
+  const deleteGuest = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:4005/api/Guests/${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setGuests(Guests.filter((guest) => guest.guest_id !== id));
+      }
+    } catch (error) {
+      console.error(`Delete failed: ${error.message}`);
+    }
+  };
+
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
       const user = session?.user;
@@ -38,7 +51,7 @@ export default function Tours() {
     <div>
       <h1>Tours</h1>
       <ul>
-        { Guests.map ((guest, index) => (
+        {Guests.map((guest, index) => (
           <li key={index}>
             <div>{guest.name}</div>
             <div>{guest.owner}</div>
@@ -47,6 +60,7 @@ export default function Tours() {
             <div>{guest.pp}</div>
             <div>{guest.tour_date}</div>
             <div>{guest.notes}</div>
+            <button onClick={() => deleteGuest(guest.guest_id)}>Delete</button> {/* Added this line */}
           </li>
         ))}
       </ul>
