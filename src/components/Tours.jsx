@@ -118,7 +118,6 @@ export default function Tours() {
     editedGuestData.non_owner = editedGuestData.non_owner === 'Yes' || editedGuestData.non_owner === true;
     setEditedGuest(editedGuestData);
   };
-  
 
   const updateGuest = async () => {
     try {
@@ -147,6 +146,19 @@ export default function Tours() {
       console.error(`Update failed: ${error.message}`);
     }
   };
+
+  const renderGuestForm = (guest, setGuestFunction, submitFunction, buttonText) => (
+    <>
+      <CustomInput placeholder="Name" type="text" value={guest.name} onChange={e => setGuestFunction({ ...guest, name: e.target.value })} />
+      <CustomCheckbox label="Owner" checked={guest.owner} onChange={e => setGuestFunction({ ...guest, owner: e.target.checked, non_owner: !e.target.checked })} />
+      <CustomCheckbox label="Non-Owner" checked={guest.non_owner} onChange={e => setGuestFunction({ ...guest, non_owner: e.target.checked, owner: !e.target.checked })} />
+      <CustomSelect value={guest.gift} options={premiums.map(premiumObj => premiumObj.premium)} onChange={e => setGuestFunction({ ...guest, gift: e.target.value })} />
+      <CustomInput placeholder="PP" type="text" value={guest.pp} onChange={e => setGuestFunction({ ...guest, pp: e.target.value })} />
+      <CustomInput placeholder="Tour Date" type="date" value={guest.tour_date} onChange={e => setGuestFunction({ ...guest, tour_date: e.target.value })} />
+      <CustomInput placeholder="Notes" type="text" value={guest.notes} onChange={e => setGuestFunction({ ...guest, notes: e.target.value })} />
+      <button onClick={submitFunction}>{buttonText}</button>
+    </>
+  );
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
@@ -177,18 +189,11 @@ export default function Tours() {
       <h1>Tours</h1>
       <div>
         <h2>Add New Guest</h2>
-        <CustomInput placeholder="Name" type="text" value={newGuest.name} onChange={e => setNewGuest({ ...newGuest, name: e.target.value })} />
-        <CustomCheckbox label="Owner" checked={newGuest.owner} onChange={e => setNewGuest({ ...newGuest, owner: e.target.checked, non_owner: !e.target.checked })} />
-        <CustomCheckbox label="Non-Owner" checked={newGuest.non_owner} onChange={e => setNewGuest({ ...newGuest, non_owner: e.target.checked, owner: !e.target.checked })} />
-        <CustomSelect value={newGuest.gift} options={premiums.map(premiumObj => premiumObj.premium)} onChange={e => setNewGuest({ ...newGuest, gift: e.target.value })} />
-        <CustomInput placeholder="PP" type="text" value={newGuest.pp} onChange={e => setNewGuest({ ...newGuest, pp: e.target.value })} />
-        <CustomInput placeholder="Tour Date" type="date" value={newGuest.tour_date} onChange={e => setNewGuest({ ...newGuest, tour_date: e.target.value })} />
-        <CustomInput placeholder="Notes" type="text" value={newGuest.notes} onChange={e => setNewGuest({ ...newGuest, notes: e.target.value })} />
-        <button onClick={addNewGuest}>Add Guest</button>
+        {renderGuestForm(newGuest, setNewGuest, addNewGuest, "Add Guest")}
       </div>
       <ul>
-  {Guests.map((guest, index) => (
-    <li key={index}>
+        {Guests.map((guest, index) => (
+          <li key={index}>
       <div>{guest.name}</div>
       <div>Owner: {guest.owner}</div>
       <div>Non-Owner: {guest.non_owner}</div>
@@ -197,23 +202,14 @@ export default function Tours() {
       <div>{guest.tour_date}</div>
       <div>{guest.notes}</div>
       {editGuestId === guest.guest_id ? (
-    <>
-      <CustomInput placeholder="Name" type="text" value={editedGuest.name} onChange={e => setEditedGuest({ ...editedGuest, name: e.target.value })} />
-      <CustomCheckbox label="Owner" checked={editedGuest.owner} onChange={e => setEditedGuest({ ...editedGuest, owner: e.target.checked, non_owner: !e.target.checked })} />
-      <CustomCheckbox label="Non-Owner" checked={editedGuest.non_owner} onChange={e => setEditedGuest({ ...editedGuest, non_owner: e.target.checked, owner: !e.target.checked })} />
-      <CustomSelect value={editedGuest.gift} options={premiums.map(premiumObj => premiumObj.premium)} onChange={e => setEditedGuest({ ...editedGuest, gift: e.target.value })} />
-      <CustomInput placeholder="PP" type="text" value={editedGuest.pp} onChange={e => setEditedGuest({ ...editedGuest, pp: e.target.value })} />
-      <CustomInput placeholder="Tour Date" type="date" value={editedGuest.tour_date} onChange={e => setEditedGuest({ ...editedGuest, tour_date: e.target.value })} />
-      <CustomInput placeholder="Notes" type="text" value={editedGuest.notes} onChange={e => setEditedGuest({ ...editedGuest, notes: e.target.value })} />
-      <button onClick={updateGuest}>Save</button>
-    </>
-  ) : (
-    <button onClick={() => startEditingGuest(guest)}>Edit</button>
-  )}
-    <button onClick={() => deleteGuest(guest.guest_id)}>Delete</button>
-    </li>
-  ))}
-</ul>
+              renderGuestForm(editedGuest, setEditedGuest, updateGuest, "Save")
+            ) : (
+              <button onClick={() => startEditingGuest(guest)}>Edit</button>
+            )}
+            <button onClick={() => deleteGuest(guest.guest_id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
