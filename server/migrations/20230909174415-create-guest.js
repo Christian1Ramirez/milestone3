@@ -23,7 +23,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      pp: {
+      pay_per_tour: {
+        type: Sequelize.SMALLINT,
+        allowNull: false
+      },
+      projected_pay: {
         type: Sequelize.SMALLINT,
         allowNull: false
       },

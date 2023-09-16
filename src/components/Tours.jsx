@@ -33,7 +33,8 @@ export default function Tours() {
     owner: false,
     non_owner: false,
     gift: '',
-    pp: '',
+    pay_per_tour: '',
+    projected_pay: '',
     tour_date: '',
     notes: ''
   });
@@ -47,7 +48,8 @@ export default function Tours() {
     owner: false,
     non_owner: false,
     gift: '',
-    pp: '',
+    pay_per_tour: '',
+    projected_pay: '',
     tour_date: '',
     notes: ''
   });
@@ -102,7 +104,8 @@ export default function Tours() {
           owner: false,
           non_owner: false,
           gift: '',
-          pp: '',
+          pay_per_tour: '',
+          projected_pay: '',
           tour_date: '',
           notes: ''
         });
@@ -137,7 +140,8 @@ export default function Tours() {
           owner: false,
           non_owner: false,
           gift: '',
-          pp: '',
+          pay_per_tour: '',
+          projected_pay: '',
           tour_date: '',
           notes: ''
         });
@@ -153,7 +157,8 @@ export default function Tours() {
       <CustomCheckbox label="Owner" checked={guest.owner} onChange={e => setGuestFunction({ ...guest, owner: e.target.checked, non_owner: !e.target.checked })} />
       <CustomCheckbox label="Non-Owner" checked={guest.non_owner} onChange={e => setGuestFunction({ ...guest, non_owner: e.target.checked, owner: !e.target.checked })} />
       <CustomSelect value={guest.gift} options={premiums.map(premiumObj => premiumObj.premium)} onChange={e => setGuestFunction({ ...guest, gift: e.target.value })} />
-      <CustomInput placeholder="PP" type="text" value={guest.pp} onChange={e => setGuestFunction({ ...guest, pp: e.target.value })} />
+      <CustomInput placeholder="pay_per_tour" type="smallint" value={guest.pay_per_tour} onChange={e => setGuestFunction({ ...guest, pay_per_tour: e.target.value })} />
+      <CustomInput placeholder="projected_pay" type="smallint" value={guest.projected_pay} onChange={e => setGuestFunction({ ...guest, projected_pay: e.target.value })} />
       <CustomInput placeholder="Tour Date" type="date" value={guest.tour_date} onChange={e => setGuestFunction({ ...guest, tour_date: e.target.value })} />
       <CustomInput placeholder="Notes" type="text" value={guest.notes} onChange={e => setGuestFunction({ ...guest, notes: e.target.value })} />
       <button onClick={submitFunction}>{buttonText}</button>
@@ -198,7 +203,8 @@ export default function Tours() {
       <div>Owner: {guest.owner}</div>
       <div>Non-Owner: {guest.non_owner}</div>
       <div>{guest.gift}</div>
-      <div>{guest.pp}</div>
+      <div>{guest.pay_per_tour}</div>
+      <div>{guest.projected_pay}</div>
       <div>{guest.tour_date}</div>
       <div>{guest.notes}</div>
       {editGuestId === guest.guest_id ? (

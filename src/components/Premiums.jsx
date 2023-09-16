@@ -25,6 +25,7 @@ export default function Premiums() {
         <thead>
           <tr>
             <th>Premium</th>
+            <th>Preview</th>
             <th>Price</th>
             <th>Retail</th>
             <th>Time</th>
@@ -36,6 +37,16 @@ export default function Premiums() {
           {gifts.map((gift) => (
             <tr key={gift.gift_id}>
               <td>{gift.premium}</td>
+              <td>
+                <iframe 
+                  width="560" 
+                  height="315" 
+                  src={gift.premium_preview} 
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allowFullScreen
+                ></iframe>
+              </td>
               <td>{gift.price}</td>
               <td>{gift.retail}</td>
               <td>{gift.time}</td>

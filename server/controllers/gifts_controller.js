@@ -29,15 +29,15 @@ Gifts.get('/:gift_id', async (req, res) => {
 })
 
 // CREATE NEW GIFT
-Gifts.post('/', async (req, res) => {
-    try {
-        const newGift = await Gift.create(req.body)
-        res.status(201).json(newGift)
-    } catch (err) {
-        res.status(500).send("Server error")
-        console.log(err)
-    }
-})
+// Gifts.post('/', async (req, res) => {
+//     try {
+//         const newGift = await Gift.create(req.body)
+//         res.status(201).json(newGift)
+//     } catch (err) {
+//         res.status(500).send("Server error")
+//         console.log(err)
+//     }
+// })
 
 // UPDATE GIFT
 Gifts.put('/:gift_id', async (req, res) => {

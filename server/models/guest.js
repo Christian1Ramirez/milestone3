@@ -33,7 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    pp: {
+    pay_per_tour: {
+      type: DataTypes.SMALLINT,
+      allowNull: false
+    },
+    projected_pay: {
       type: DataTypes.SMALLINT,
       allowNull: false
     },
