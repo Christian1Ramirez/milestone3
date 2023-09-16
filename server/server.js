@@ -16,6 +16,9 @@ app.use(express.static(path.join(__dirname, '../build')))
 const guestsController = require('./controllers/guests_controller');
 app.use('/api/Guests', guestsController)
 
+const giftsController = require('./controllers/gifts_controller');
+app.use('/api/Gifts', giftsController)
+
 
 // LISTEN
 app.listen(4005, () => {

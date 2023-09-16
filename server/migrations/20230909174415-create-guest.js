@@ -31,7 +31,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       tour_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false  
+      },
+      user_id: {
+        type: Sequelize.UUID,  
+        allowNull: true
       }
     });
   },
