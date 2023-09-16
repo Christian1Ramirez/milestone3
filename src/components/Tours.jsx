@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../services/supabaseClient';
+import ProjectedPayCalculator from './ProjectedPayCalculator';
 
 function CustomInput({ placeholder, type, value, onChange }) {
-  return <input type={type} placeholder={placeholder} value={value} onChange={onChange} />;
+  return <input type={type} placeholder={placeholder} value={value || ''} onChange={onChange} />;
 }
 
 function CustomCheckbox({ label, checked, onChange }) {
@@ -151,14 +152,20 @@ export default function Tours() {
     }
   };
 
+  const projectedPay = ProjectedPayCalculator(newGuest.pay_per_tour, newGuest.gift);
+  
+  useEffect(() => {
+    setNewGuest({ ...newGuest, projected_pay: projectedPay });
+  }, [projectedPay]);
+
   const renderGuestForm = (guest, setGuestFunction, submitFunction, buttonText) => (
     <>
       <CustomInput placeholder="Name" type="text" value={guest.name} onChange={e => setGuestFunction({ ...guest, name: e.target.value })} />
       <CustomCheckbox label="Owner" checked={guest.owner} onChange={e => setGuestFunction({ ...guest, owner: e.target.checked, non_owner: !e.target.checked })} />
       <CustomCheckbox label="Non-Owner" checked={guest.non_owner} onChange={e => setGuestFunction({ ...guest, non_owner: e.target.checked, owner: !e.target.checked })} />
       <CustomSelect value={guest.gift} options={premiums.map(premiumObj => premiumObj.premium)} onChange={e => setGuestFunction({ ...guest, gift: e.target.value })} />
-      <CustomInput placeholder="pay_per_tour" type="smallint" value={guest.pay_per_tour} onChange={e => setGuestFunction({ ...guest, pay_per_tour: e.target.value })} />
-      <CustomInput placeholder="projected_pay" type="smallint" value={guest.projected_pay} onChange={e => setGuestFunction({ ...guest, projected_pay: e.target.value })} />
+      <CustomInput placeholder="Pay Per Tour" type="smallint" value={guest.pay_per_tour} onChange={e => setGuestFunction({ ...guest, pay_per_tour: e.target.value })} />
+      <CustomInput placeholder="Projected Pay" type="smallint" value={guest.projected_pay} onChange={e => setGuestFunction({ ...guest, projected_pay: e.target.value })} />
       <CustomInput placeholder="Tour Date" type="date" value={guest.tour_date} onChange={e => setGuestFunction({ ...guest, tour_date: e.target.value })} />
       <CustomInput placeholder="Notes" type="text" value={guest.notes} onChange={e => setGuestFunction({ ...guest, notes: e.target.value })} />
       <button onClick={submitFunction}>{buttonText}</button>

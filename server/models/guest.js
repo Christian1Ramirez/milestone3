@@ -34,11 +34,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     pay_per_tour: {
-      type: DataTypes.SMALLINT,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     projected_pay: {
-      type: DataTypes.SMALLINT,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     tour_date: {

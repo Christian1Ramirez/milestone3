@@ -14,11 +14,11 @@ module.exports = {
         allowNull: false
       },
       price: {
-        type: Sequelize.TEXT,
+        type: Sequelize.DOUBLE,
         allowNull: true
       },
       retail: {
-        type: Sequelize.TEXT,
+        type: Sequelize.DOUBLE,
         allowNull: true
       },
       time: {

@@ -24,11 +24,11 @@ module.exports = {
         allowNull: false
       },
       pay_per_tour: {
-        type: Sequelize.SMALLINT,
+        type: Sequelize.DOUBLE,
         allowNull: false
       },
       projected_pay: {
-        type: Sequelize.SMALLINT,
+        type: Sequelize.DOUBLE,
         allowNull: false
       },
       notes: {
