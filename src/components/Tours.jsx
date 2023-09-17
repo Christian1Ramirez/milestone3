@@ -155,8 +155,9 @@ export default function Tours() {
   const projectedPay = ProjectedPayCalculator(newGuest.pay_per_tour, newGuest.gift);
   
   useEffect(() => {
-    setNewGuest({ ...newGuest, projected_pay: projectedPay });
+    setNewGuest(prevGuest => ({ ...prevGuest, projected_pay: projectedPay }));
   }, [projectedPay]);
+
 
   const renderGuestForm = (guest, setGuestFunction, submitFunction, buttonText) => (
     <>
