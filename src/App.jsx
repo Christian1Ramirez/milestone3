@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Premiums from './components/Premiums';
 import Tours from './components/Tours';
 import Login from './components/Login';
-import Logout from './components/Logout'
 import SignUp from './components/SignUp';
 
 
@@ -22,7 +21,6 @@ function App() {
             <Route path='/premiums' element={<Premiums />} />
             <Route path='/tours' element={<Tours />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/logout' element={<Logout />} />
             <Route path='/signup' element={<SignUp />} />
           </Routes>
         </main>
