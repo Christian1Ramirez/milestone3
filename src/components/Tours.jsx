@@ -42,8 +42,6 @@ export default function Tours() {
   });
   const [premiums, setPremiums] = useState([]);
   const navigate = useNavigate();
-
-  // New state for editing
   const [editGuestId, setEditGuestId] = useState(null);
   const [editedGuest, setEditedGuest] = useState({
     name: '',
@@ -61,7 +59,8 @@ export default function Tours() {
     try {
       const { data, error } = await supabase.from('Gifts').select('premium');
       if (error) throw error;
-      setPremiums(data);
+  
+      setPremiums(data.sort((a, b) => a.premium.localeCompare(b.premium)));
     } catch (error) {
       console.error(`Fetching premiums failed: ${error.message}`);
     }
@@ -124,18 +123,27 @@ export default function Tours() {
     setEditedGuest(editedGuestData);
   };
 
+    const editedProjectedPay = ProjectedPayCalculator(editedGuest.pay_per_tour, editedGuest.gift);
+    useEffect(() => {
+      setEditedGuest(prevGuest => ({ ...prevGuest, projected_pay: editedProjectedPay }));
+    }, [editedProjectedPay]);
+
   const updateGuest = async () => {
+    const updatedEditedGuest = { ...editedGuest };
+    updatedEditedGuest.owner = updatedEditedGuest.owner ? 'Yes' : 'No';
+    updatedEditedGuest.non_owner = updatedEditedGuest.non_owner ? 'Yes' : 'No';
+
     try {
       const response = await fetch(`http://localhost:4005/api/Guests/${editGuestId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(editedGuest),
+        body: JSON.stringify(updatedEditedGuest),
       });
 
       if (response.ok) {
-        setGuests(Guests.map((guest) => (guest.guest_id === editGuestId ? editedGuest : guest)));
+        setGuests(Guests.map((guest) => (guest.guest_id === editGuestId ? updatedEditedGuest : guest))); 
         setEditGuestId(null);
         setEditedGuest({
           name: '',
@@ -154,19 +162,18 @@ export default function Tours() {
   };
 
   const projectedPay = ProjectedPayCalculator(newGuest.pay_per_tour, newGuest.gift);
-  
   useEffect(() => {
     setNewGuest(prevGuest => ({ ...prevGuest, projected_pay: projectedPay }));
   }, [projectedPay]);
 
 
-  const renderGuestForm = (guest, setGuestFunction, submitFunction, buttonText) => (
-    <form className="custom-form">
-      <CustomInput placeholder="Name" type="text" value={guest.name} onChange={e => setGuestFunction({ ...guest, name: e.target.value })} />
+  const renderGuestForm = (guest, setGuestFunction, submitFunction, buttonText, formClass) => (
+    <form className={`custom-form ${formClass}`}>
       <CustomCheckbox label="Owner" checked={guest.owner} onChange={e => setGuestFunction({ ...guest, owner: e.target.checked, non_owner: !e.target.checked })} />
       <CustomCheckbox label="Non-Owner" checked={guest.non_owner} onChange={e => setGuestFunction({ ...guest, non_owner: e.target.checked, owner: !e.target.checked })} />
-      <CustomSelect value={guest.gift} options={premiums.map(premiumObj => premiumObj.premium)} onChange={e => setGuestFunction({ ...guest, gift: e.target.value })} />
+      <CustomInput placeholder="Name" type="text" value={guest.name} onChange={e => setGuestFunction({ ...guest, name: e.target.value })} />
       <CustomInput placeholder="Pay Per Tour" type="smallint" value={guest.pay_per_tour} onChange={e => setGuestFunction({ ...guest, pay_per_tour: e.target.value })} />
+      <CustomSelect value={guest.gift} options={premiums.map(premiumObj => premiumObj.premium)} onChange={e => setGuestFunction({ ...guest, gift: e.target.value })} />
       <CustomInput placeholder="Projected Pay" type="smallint" value={guest.projected_pay} onChange={e => setGuestFunction({ ...guest, projected_pay: e.target.value })} />
       <CustomInput placeholder="Tour Date" type="date" value={guest.tour_date} onChange={e => setGuestFunction({ ...guest, tour_date: e.target.value })} />
       <CustomInput placeholder="Notes" type="text" value={guest.notes} onChange={e => setGuestFunction({ ...guest, notes: e.target.value })} />
@@ -209,26 +216,36 @@ export default function Tours() {
       <h1 className="tours-title">Tours</h1>
       <div className="add-new-guest">
         <h2>Add New Guest</h2>
-        {renderGuestForm(newGuest, setNewGuest, addNewGuest, "Add Guest")}
+        <div>
+          {renderGuestForm(newGuest, setNewGuest, addNewGuest, "Add Guest", "add-new-guest-form")}
+        </div>
       </div>
       <ul className="guest-list">
         {Guests.map((guest, index) => (
           <li key={index} className="guest-item">
-      <div>{guest.name}</div>
-      <div>Owner: {guest.owner}</div>
-      <div>Non-Owner: {guest.non_owner}</div>
-      <div>{guest.gift}</div>
-      <div>{guest.pay_per_tour}</div>
-      <div>{guest.projected_pay}</div>
-      <div>{guest.tour_date}</div>
-      <div>{guest.notes}</div>
-      <div className="guest-actions">
-        {editGuestId === guest.guest_id ? (
-          renderGuestForm(editedGuest, setEditedGuest, updateGuest, "Save")
-        ) : (
-          <button className="edit-button" onClick={() => startEditingGuest(guest)}>Edit</button>
-        )}
-              <button className="delete-button" onClick={() => deleteGuest(guest.guest_id)}>Delete</button>
+            <div className="guest-card">
+              <div className="guest-card-header">
+                <div className="guest-name">{guest.name}</div>
+                <div className="owner-status">Owner: {guest.owner}</div>
+                <div className="non-owner-status">Non-Owner: {guest.non_owner}</div>
+              </div>
+              <div className="guest-card-body">
+                <div className="guest-detail">{guest.gift}</div>
+                <div className="guest-detail">Pay Per Tour: ${guest.pay_per_tour}</div>
+                <div className="guest-detail">Projected Pay: ${guest.projected_pay}</div>
+                <div className="guest-detail">Tour Date: {guest.tour_date}</div>
+                <div className="guest-notes">{guest.notes}</div>
+              </div>
+              <div className="guest-card-footer">
+                <div className="guest-actions">
+                  {editGuestId === guest.guest_id ? (
+                    renderGuestForm(editedGuest, setEditedGuest, updateGuest, "Save", "edit-guest-form")
+                  ) : (
+                    <button className="edit-button" onClick={() => startEditingGuest(guest)}>Edit</button>
+                  )}
+                  <button className="delete-button" onClick={() => deleteGuest(guest.guest_id)}>Delete</button>
+                </div>
+              </div>
             </div>
           </li>
         ))}
