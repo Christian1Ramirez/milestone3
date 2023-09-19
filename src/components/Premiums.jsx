@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import supabase from '../services/supabaseClient'; 
+import supabase from '../services/supabaseClient';
+import '../styles/premiums.css'; // Import the new CSS file
 
 export default function Premiums() {
   const [gifts, setGifts] = useState([]);
@@ -19,9 +20,9 @@ export default function Premiums() {
   }, []);
 
   return (
-    <div>
-      <h1>Premium Gifts</h1>
-      <table>
+    <div className="premium-container">
+      <h1 className="premium-header">Premium Gifts</h1>
+      <table className="table table-dark table-hover">
         <thead>
           <tr>
             <th>Premium</th>
@@ -38,12 +39,11 @@ export default function Premiums() {
             <tr key={gift.gift_id}>
               <td>{gift.premium}</td>
               <td>
-                <iframe 
-                  width="560" 
-                  height="315" 
-                  src={gift.premium_preview} 
-                  title="YouTube video player" 
-                  frameBorder="0" 
+                <iframe
+                  className="premium-video"
+                  src={gift.premium_preview}
+                  title="YouTube video player"
+                  frameBorder="0"
                   allowFullScreen
                 ></iframe>
               </td>
