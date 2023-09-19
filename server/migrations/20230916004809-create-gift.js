@@ -2,41 +2,36 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Guests', {
-      guest_id: {
+    await queryInterface.createTable('Gifts', {
+      gift_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      premium: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      owner: {
-        type: Sequelize.STRING
-      },
-      non_owner: {
-        type: Sequelize.STRING
-      },
-      gift: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      pay_per_tour: {
+      price: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        allowNull: true
       },
-      projected_pay: {
+      retail: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        allowNull: true
       },
-      notes: {
-        type: Sequelize.STRING
+      time: {
+        type: Sequelize.TEXT,
+        allowNull: true
       },
-      tour_date: {
-        type: Sequelize.DATE,
-        allowNull: false  
+      availability: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
+      location: {
+        type: Sequelize.TEXT,
+        allowNull: true
       },
       user_id: {
         type: Sequelize.UUID,  
@@ -45,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Guests');
+    await queryInterface.dropTable('Gifts');
   }
 };

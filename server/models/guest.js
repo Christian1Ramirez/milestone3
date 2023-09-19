@@ -33,8 +33,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    pp: {
-      type: DataTypes.SMALLINT,
+    pay_per_tour: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
+    },
+    projected_pay: {
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     tour_date: {
@@ -42,7 +46,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     notes: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+    },
+    user_id: {
+      type: DataTypes.UUID,
+      allowNull: true
     }
   }, {
     sequelize,
