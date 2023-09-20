@@ -2,6 +2,10 @@ body {
  background-color: #181818;
 }
 
+.navbar {
+ z-index: 1;
+}
+
 .home {
  position: relative;
  margin: auto;
@@ -28,13 +32,13 @@ body {
 
 .home:before {
  background-image: linear-gradient(to right, #181818, transparent, #181818);
- top: 0; 
+ top: 0;
  left: 0;
 }
 
 .home:after {
  background-image: linear-gradient(to left, #181818, transparent, #181818);
- top: 0; 
+ top: 0;
  right: 0;
 }
 
