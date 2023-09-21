@@ -18,7 +18,6 @@ function Navbar() {
   const handleLogout = async () => {
     let { error } = await supabase.auth.signOut();
     if (error) {
-      console.log("Logout Error:", error);
     } else {
       window.alert("You have successfully logged out!");
       navigate("/");

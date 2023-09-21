@@ -7,12 +7,13 @@ function SignUp() {
   const [password, setPassword] = useState('');
 
   const handleSignUp = async () => {
-    let { data, error } = await supabase.auth.signUp({
+    let { error } = await supabase.auth.signUp({
       email,
       password,
     });
-    if (error) console.log("Signup Error:", error);
-    else console.log("Signup Success:", data);
+    if (error) {
+    } else {
+    }
   };
 
   return (

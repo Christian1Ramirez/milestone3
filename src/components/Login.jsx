@@ -10,14 +10,12 @@ function Login() {
  const navigate = useNavigate();
 
  const handleLogin = async () => {
-  let { data, error } = await supabase.auth.signInWithPassword({
+  let { error } = await supabase.auth.signInWithPassword({
    email,
    password,
   });
   if (error) {
-   console.log("Login Error:", error);
   } else {
-   console.log("Login Success:", data);
    navigate("/");
   }
  };
