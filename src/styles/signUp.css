@@ -48,6 +48,26 @@
  text-decoration: underline;
 }
 
+.btn-primary {
+    background-color: #389d6f;
+    border: none;
+    transition: all 0.3s ease;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: #ededed;
+  }
+  
+  .btn-primary:hover {
+    filter: brightness(1.2);
+  }
+  
+  .btn-primary:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease-in-out;
+  }
+  
+
 @media (max-width: 768px) {
  .signup-container {
   padding: 20px;

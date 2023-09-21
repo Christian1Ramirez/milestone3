@@ -1,3 +1,4 @@
+// React component code (No changes)
 import React, { useState, useEffect } from 'react';
 import supabase from '../services/supabaseClient';
 import '../styles/premiums.css'; // Import the new CSS file
@@ -19,6 +20,8 @@ export default function Premiums() {
     fetchGifts();
   }, []);
 
+  const sortedGifts = gifts.sort((a, b) => a.premium.localeCompare(b.premium));
+
   return (
     <div className="premium-container">
       <h1 className="premium-header">Premium Gifts</h1>
@@ -35,7 +38,7 @@ export default function Premiums() {
           </tr>
         </thead>
         <tbody>
-          {gifts.map((gift) => (
+          {sortedGifts.map((gift) => (
             <tr key={gift.gift_id}>
               <td>{gift.premium}</td>
               <td>
