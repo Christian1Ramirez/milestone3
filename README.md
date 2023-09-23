@@ -1,70 +1,155 @@
-# Getting Started with Create React App
+# TourHub: Your Ultimate Guest Management & Marketing Platform
+Welcome to TourHub, the comprehensive solution designed specifically for the unparalleled sales marketer, Luisa Ramirez. This platform serves as an intuitive control panel where Luisa can effortlessly manage the guests she enrolls. In addition, TourHub provides a seamless way to showcase vital premium information including event location, time schedules, dark days, retail value, and even a sneak peek via a short YouTube preview. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [Usage and Features](#usage-and-features)
+- [NPM Installations](#npm-installations)
+- [Acknowledgments](#acknowledgments)
+- [Built With](#built-with)
+- [Deployment](#deployment)
+- [Changelog](#changelog)
+- [Authors](#authors)
+- [Post MVP Plans](#post-mvp-plans)
 
-In the project directory, you can run:
+# Usage and Features: The Multifaceted TourHub Experience
 
-### `npm start`
+Welcome to TourHub, more than just a calculator—it's your ultimate sales enablement platform. Designed specifically for my wife to present her compelling premium and gift offerings to potential guests, TourHub streamlines the entire guest onboarding process.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tours Page: Your Control Center
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+At the heart of TourHub is the "Tours" page, engineered to be a comprehensive management system. Here, users can:
 
-### `npm test`
+- **Track Guest Sign-ups**: Keep an organized record of each guest signed up for a tour with a sales representative.
+  
+- **Dynamic 'Pay Per Tour' Calculation**: The platform allows for manual input of a fluctuating number that represents the "pay per tour." This number is then automatically adjusted by subtracting the value of the chosen premium, generating an accurate pay per tour figure.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Ownership Status**: Conveniently indicate whether guests own or do not own property with the hotel, offering valuable context for each interaction.
+  
+- **Effortless Editing**: Modify saved guest information with ease and accuracy.
+  
+## User Authentication for Enhanced Security
+  
+To ensure privacy and data integrity, the Tours page is safeguarded by robust user authentication features, including:
 
-### `npm run build`
+- **User Sign-up**: New users can easily create an account.
+  
+- **User Login**: Returning users can securely access their data.
+  
+As a result, the Tours page remains inaccessible unless you are logged in, providing a secure and reliable experience.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Optimized for Multiple Devices
+  
+TourHub has been optimized for a seamless experience across phones, desktops, and tablets, instilling confidence regardless of your chosen device.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Acknowledgments
+https://getbootstrap.com/docs/5.3/getting-started/introduction/
+https://www.youtube.com/watch?v=fBcqjYfVCdY
+https://chat.openai.com/
+https://www.youtube.com/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# NPM Installations
+npx create-react-app .
+npm i cors dotenv express pg pg-hstore sequelize react-router-dom
+npm install --save-dev sequelize-cli
+npx sequelize init
+sequelize model:generate --name Guest --attributes guest_id:integer,name:string,owner:string,non_owner:string,gift:string,pp:integer,notes:string       
+sequelize seed:generate --name guests
+sequelize db:seed:all 
+this generates all seeder files
+sequelize db:seed --seed 20230909185853-guests.js
+this generates only a specific seeder file which in this case is guests.js
+node server/server.js
+npm run build
+this minifies and optimize our react app down into a build folder with a bunch of static files
+you need to npm run build every time you make an improvement or changes
+npm install @supabase/supabase-js
+npm install bootstrap
+npm install popper.js 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Changelog
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Updates and Commits
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### September 21, 2023
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Christian1Ramirez:** Saving before merging into main
 
-## Learn More
+### September 19, 2023
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Christian1Ramirez:** Home pretty much completed
+- **Christian1Ramirez:** Home.css coming along
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### September 18, 2023
 
-### Code Splitting
+- **Christian1Ramirez:** Updated shadow for all CSS
+- **Christian1Ramirez:** Improved cards under home page
+- **Christian1Ramirez:** Added Home.jsx/css background
+- **Christian1Ramirez:** Premiums.css completish
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### September 17, 2023
 
-### Analyzing the Bundle Size
+- **Christian1Ramirez:** Premiums.jsx/css coming along
+- **Christian1Ramirez:** Completed Tours.jsx/css & started Premiums.jsx/css
+- **Christian1Ramirez:** Added color for JSX save button
+- **Christian1Ramirez:** Adjusted .css code layout with Prettier
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### September 16, 2023
 
-### Making a Progressive Web App
+- **Christian1Ramirez:** Updated navbar.jsx.css, home.css, login.jsx.css; Deleted logout.jsx & App...
+- **Christian1Ramirez:** Added login.css, styles folder with .css files, and images folder in public with...
+- **Christian1Ramirez:** Completed Navbar.jsx/navbar.css
+- **Christian1Ramirez:** Added CSS to navbar and added collapse functionality while on smaller window
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Earlier Commits
 
-### Advanced Configuration
+- **Christian1Ramirez:** Added projected pay calculator.jsx and integrated it into Tours.jsx
+- **Christian1Ramirez:** Updated PP to pay per tour, added projected pay in tours.jsx, updated...
+- **Christian1Ramirez:** Added Premiums.jsx, gifts_controller.js, model/migration/seeder for Premiums
+- **Christian1Ramirez:** Cleaned up Tours.jsx a bit
+- **Christian1Ramirez:** Added edit function to tours and made code more DRY
+- **Christian1Ramirez:** Added gift dropdown to add a new guest in tours
+- **Christian1Ramirez:** Added front-end delete functionality to guests table
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Even Earlier Commits
 
-### Deployment
+- **Christian1Ramirez:** Added get & get single functionality to guests_controller.js
+- **Christian1Ramirez:** Added put/delete functionality to guests_controller.js
+- **Christian1Ramirez:** Added delete functionality to Tours.jsx
+- **Christian1Ramirez:** Tours only accessible if logged in, redirects to login if not
+- **Christian1Ramirez:** Signup & login fully functional
+- **Christian1Ramirez:** Signup works but login, post error when trying to login
+- **Christian1Ramirez:** Added navbar, home, login, logout, signup and all routes are functional
+- **Christian1Ramirez:** Added supabaseClient.js & login.jsx
+- **Christian1Ramirez:** Added build folder
+- **Christian1Ramirez:** New branch for the coal mine
+- **Christian1Ramirez:** Guests table displays under Tours
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# Built With
+Supabase
+React
+Node
+Json
+Javascript
+Html
+Bootstrap
+Css
 
-### `npm run build` fails to minify
+# Deployment
+https://tourhub.onrender.com/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Authors
+Christian J Ramirez
+
+## Post MVP Plans
+
+Here are the plans for enhancing the project after reaching the minimum viable product (MVP) stage:
+
+- **Switch to Tailwind**: Remove all Bootstrap code and transition to Tailwind as a learning experiment.
+- **Homepage UX**: Work on improving the user experience on the homepage, particularly in how data is displayed.
+- **Premiums Display**: Refactor and improve the way premiums are displayed to the user.
+- **Search Feature**: Implement a search functionality for easier data retrieval.
+- **Data Visualization**: Add graphical representations to display information for custom date ranges.
+- **Optimization**: Focus on improving performance across various aspects of the application.
+- **Market to Management**: Eventually aim to pitch the platform to managerial roles for broader adoption.
