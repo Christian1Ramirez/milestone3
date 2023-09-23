@@ -14,7 +14,7 @@ Welcome to TourHub, a robust and tailored solution crafted with the savvy sales 
 
 # Usage and Features: The Multifaceted TourHub Experience
 
-Welcome to TourHub, more than just a calculator—it's your ultimate sales enablement platform. Designed specifically for my wife to present her compelling premium and gift offerings to potential guests, TourHub streamlines the entire guest onboarding process.
+More than just a glorified calculator—it's your ultimate sales enablement platform. Designed specifically for my wife to present her compelling premium and gift offerings to potential guests, TourHub streamlines the entire guest onboarding process.
 
 ## Tours Page: Your Control Center
 
@@ -43,11 +43,20 @@ As a result, the Tours page remains inaccessible unless you are logged in, provi
 TourHub has been optimized for a seamless experience across phones, desktops, and tablets, instilling confidence regardless of your chosen device.
 
 # Acknowledgments
-https://getbootstrap.com/docs/5.3/getting-started/introduction/
-https://www.youtube.com/watch?v=fBcqjYfVCdY
-https://chat.openai.com/
-https://www.youtube.com/
 
+Special thanks to the following resources for guidance and inspiration:
+
+- **Bootstrap Documentation**: Comprehensive guide on how to get started with Bootstrap.  
+  [Bootstrap Getting Started](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+
+- **YouTube Tutorial**: Provided valuable insights into the project development process.  
+  [Watch the Video](https://www.youtube.com/watch?v=fBcqjYfVCdY)
+
+- **OpenAI Chat**: For AI-related guidance and APIs.  
+  [OpenAI Chat](https://chat.openai.com/)
+
+- **Additional YouTube Resource**: For further information and tutorials not to mention the iframes.  
+  [YouTube](https://www.youtube.com/)
 
 # NPM Installations
 
@@ -154,14 +163,15 @@ Here are all the dependecies and npm commands istalled during the build:
 - **Christian1Ramirez:** Guests table displays under Tours
 
 # Built With
-Supabase
-React
-Node
-Json
-Javascript
-Html
-Bootstrap
-Css
+
+- **Supabase**: Used as the backend service, providing real-time databases and authentication.
+- **React**: Utilized for building the user interface components.
+- **Node**: The runtime environment for executing server-side JavaScript code.
+- **JSON**: Used for storing and transporting data.
+- **JavaScript**: The primary programming language for frontend and backend logic.
+- **HTML**: Markup language for creating the structure of web pages.
+- **Bootstrap**: CSS framework for responsive and mobile-first design.
+- **CSS**: Used for styling and layout.
 
 # Deployment
 https://tourhub.onrender.com/
