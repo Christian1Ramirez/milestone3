@@ -1,5 +1,5 @@
-# TourHub: Your Ultimate Guest Management & Marketing Platform
-Welcome to TourHub, the comprehensive solution designed specifically for the unparalleled sales marketer, Luisa Ramirez. This platform serves as an intuitive control panel where Luisa can effortlessly manage the guests she enrolls. In addition, TourHub provides a seamless way to showcase vital premium information including event location, time schedules, dark days, retail value, and even a sneak peek via a short YouTube preview. 
+# TourHub: The Definitive Guest Management & Marketing Platform for Sales Excellence
+Welcome to TourHub, a robust and tailored solution crafted with the savvy sales marketer, Luisa Ramirez, in mind. This all-in-one platform functions as an intuitive dashboard, empowering Luisa to manage her guest enrollments effortlessly. Beyond guest management, TourHub enriches your marketing strategy by displaying crucial premium content—ranging from event locations and time schedules to dark days, retail values, and even a teaser via an engaging YouTube preview.
 
 ## Table of Contents
 
@@ -50,23 +50,50 @@ https://www.youtube.com/
 
 
 # NPM Installations
-npx create-react-app .
-npm i cors dotenv express pg pg-hstore sequelize react-router-dom
-npm install --save-dev sequelize-cli
-npx sequelize init
-sequelize model:generate --name Guest --attributes guest_id:integer,name:string,owner:string,non_owner:string,gift:string,pp:integer,notes:string       
-sequelize seed:generate --name guests
-sequelize db:seed:all 
-this generates all seeder files
-sequelize db:seed --seed 20230909185853-guests.js
-this generates only a specific seeder file which in this case is guests.js
-node server/server.js
-npm run build
-this minifies and optimize our react app down into a build folder with a bunch of static files
-you need to npm run build every time you make an improvement or changes
-npm install @supabase/supabase-js
-npm install bootstrap
-npm install popper.js 
+
+Here are all the dependecies and npm commands istalled during the build:
+
+- **Create a new React App**:  
+  ```npx create-react-app .```
+  
+- **Install Backend Dependencies**:  
+  ```npm i cors dotenv express pg pg-hstore sequelize react-router-dom```
+  
+- **Install Sequelize CLI as Dev Dependency**:  
+  ```npm install --save-dev sequelize-cli```
+  
+- **Initialize Sequelize**:  
+  ```npx sequelize init```
+  
+- **Generate Guest Model**:  
+  ```sequelize model:generate --name Guest --attributes guest_id:integer,name:string,owner:string,non_owner:string,gift:string,pp:integer,notes:string```
+
+- **Generate Seeder for Guests**:  
+  ```sequelize seed:generate --name guests```
+
+- **Run All Seeder Files**:  
+  ```sequelize db:seed:all```
+  (this generates all seeder files)
+  
+- **Run a Specific Seeder File (guests.js in this case)**:  
+  ```sequelize db:seed --seed 20230909185853-guests.js```
+  (this generates only a specific seeder file which in this case is guests.js)
+
+- **Run the Server**:  
+  ```node server/server.js```
+
+- **Build the React App**:  
+  ```npm run build```
+  (this minifies and optimize our React app down into a build folder with a bunch of static files; you need to npm run build every time you make an improvement or changes)
+  
+- **Install Supabase**:  
+  ```npm install @supabase/supabase-js```
+  
+- **Install Bootstrap**:  
+  ```npm install bootstrap```
+  
+- **Install Popper.js**:  
+  ```npm install popper.js```
 
 # Changelog
 
