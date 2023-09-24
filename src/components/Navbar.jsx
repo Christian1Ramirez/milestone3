@@ -1,37 +1,38 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import supabase from '../services/supabaseClient';
+import supabase from "../services/supabaseClient";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../styles/navbar.css";
 
+// Navbar is a functional component for rendering the navigation bar of the application.
 function Navbar() {
-  const navigate = useNavigate();
+ const navigate = useNavigate();
 
-  const closeMenu = () => {
-    const navElement = document.getElementById("navbarNav");
-    if (navElement.classList.contains("show")) {
-      navElement.classList.remove("show");
-    }
-  };
+ const closeMenu = () => {
+  const navElement = document.getElementById("navbarNav");
+  if (navElement.classList.contains("show")) {
+   navElement.classList.remove("show");
+  }
+ };
 
-  const handleLogout = async () => {
-    let { error } = await supabase.auth.signOut();
-    if (error) {
-    } else {
-      window.alert("You have successfully logged out!");
-      navigate("/");
-    }
-  };
+ const handleLogout = async () => {
+  let { error } = await supabase.auth.signOut();
+  if (error) {
+  } else {
+   window.alert("You have successfully logged out!");
+   navigate("/");
+  }
+ };
 
-  const handleClick = (route) => {
-    if (route === '/logout') {
-      handleLogout();
-      return;
-    }
-    navigate(route);
-    closeMenu();
-  };
+ const handleClick = (route) => {
+  if (route === "/logout") {
+   handleLogout();
+   return;
+  }
+  navigate(route);
+  closeMenu();
+ };
 
  return (
   <div className="Navbar supabase-nav">
