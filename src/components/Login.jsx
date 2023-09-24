@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "../services/supabaseClient";
 import "../styles/login.css";
 
-// The Login component handles the user login functionality.
+// The Login component handles the user login functionality with supabase .auth
 function Login() {
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
