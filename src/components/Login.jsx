@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../services/supabaseClient";
+import Snackbar from "./Snackbar";
 import "../styles/login.css";
 
 // The Login component handles the user login functionality with supabase .auth
 function Login() {
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
+ const [showSnackbar, setShowSnackbar] = useState(false);
+ const [snackbarMessage, setSnackbarMessage] = useState("");
 
  const navigate = useNavigate();
 
@@ -16,8 +19,14 @@ function Login() {
    password,
   });
   if (error) {
+   setSnackbarMessage("Invalid login. Please try again."); 
+   setShowSnackbar(true);
   } else {
-   navigate("/");
+   setSnackbarMessage("Login successful!"); 
+   setShowSnackbar(true);
+   setTimeout(() => {
+    navigate("/");
+   }, 1500); 
   }
  };
 
@@ -56,6 +65,11 @@ function Login() {
      Don't have an account? Sign Up
     </Link>
    </form>
+   <Snackbar
+    message={snackbarMessage}
+    show={showSnackbar}
+    setShow={setShowSnackbar}
+   />
   </div>
  );
 }
