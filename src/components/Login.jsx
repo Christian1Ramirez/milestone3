@@ -19,14 +19,14 @@ function Login() {
    password,
   });
   if (error) {
-   setSnackbarMessage("Invalid login. Please try again."); 
+   setSnackbarMessage("Invalid login. Please try again.");
    setShowSnackbar(true);
   } else {
-   setSnackbarMessage("Login successful!"); 
+   setSnackbarMessage("Login successful!");
    setShowSnackbar(true);
    setTimeout(() => {
     navigate("/");
-   }, 1500); 
+   }, 1500);
   }
  };
 

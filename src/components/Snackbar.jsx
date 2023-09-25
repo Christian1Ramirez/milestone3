@@ -1,20 +1,40 @@
-import React, { useEffect } from 'react';
-import '../styles/snackbar.css';
+import React, { useEffect, useState } from "react";
+import "../styles/snackbar.css";
 
 export default function Snackbar({ message, show, setShow }) {
-  useEffect(() => {
-    if (show) {
-      const timer = setTimeout(() => {
-        setShow(false);
-      }, 3500);  
+ const [shouldDissolve, setShouldDissolve] = useState(false);
 
-      return () => clearTimeout(timer);
-    }
-  }, [show, setShow]);
+ useEffect(() => {
+  let timer;
+  if (show) {
+   setShouldDissolve(false);
+   timer = setTimeout(() => {
+    setShouldDissolve(true);
+   }, 2500);
+  }
 
-  return (
-    <div className={`snackbar ${show ? 'show' : ''}`}>
-      {message}
-    </div>
-  );
+  return () => clearTimeout(timer);
+ }, [show]);
+
+ useEffect(() => {
+  let dissolveTimer;
+  if (shouldDissolve) {
+   dissolveTimer = setTimeout(() => {
+    setShow(false);
+    setShouldDissolve(false);
+   }, 500);
+  }
+
+  return () => clearTimeout(dissolveTimer);
+ }, [shouldDissolve, setShow]);
+
+ return (
+  <div
+   className={`snackbar ${show ? "show" : ""} ${
+    shouldDissolve ? "dissolve" : ""
+   }`}
+  >
+   {message}
+  </div>
+ );
 }
