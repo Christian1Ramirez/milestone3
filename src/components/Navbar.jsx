@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../services/supabaseClient";
+import Snackbar from "./Snackbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../styles/navbar.css";
@@ -8,6 +9,8 @@ import "../styles/navbar.css";
 // Navbar is a functional component for rendering the navigation bar of the application.
 function Navbar() {
  const navigate = useNavigate();
+ const [showSnackbar, setShowSnackbar] = useState(false);
+ const [snackbarMessage, setSnackbarMessage] = useState("");
 
  const closeMenu = () => {
   const navElement = document.getElementById("navbarNav");
@@ -19,10 +22,14 @@ function Navbar() {
  const handleLogout = async () => {
   let { error } = await supabase.auth.signOut();
   if (error) {
+   setSnackbarMessage("Logout failed. Please try again.");
   } else {
-   window.alert("You have successfully logged out!");
-   navigate("/");
+   setSnackbarMessage("You have successfully logged out!");
+   setTimeout(() => {
+    navigate("/");
+   }, 1500);
   }
+  setShowSnackbar(true);
  };
 
  const handleClick = (route) => {
@@ -36,6 +43,11 @@ function Navbar() {
 
  return (
   <div className="Navbar supabase-nav">
+   <Snackbar
+    message={snackbarMessage}
+    show={showSnackbar}
+    setShow={setShowSnackbar}
+   />
    <nav className="navbar navbar-expand-lg">
     <a className="navbar-brand compressible" href="/">
      TourHub

@@ -1,21 +1,36 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import supabase from "../services/supabaseClient";
+import Snackbar from "./Snackbar";
 import "../styles/signUp.css";
 
 // SignUp is the main component for the sign-up page
 function SignUp() {
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
+ const [showSnackbar, setShowSnackbar] = useState(false);
+ const [snackbarMessage, setSnackbarMessage] = useState("");
 
- // This function handles the user sign-up process
  const handleSignUp = async () => {
+  if (password.length < 6) {
+   setSnackbarMessage("Your password needs to be at least 6 characters long.");
+   setShowSnackbar(true);
+   return;
+  }
+
   let { error } = await supabase.auth.signUp({
    email,
    password,
   });
   if (error) {
+   if (error.message.includes("already in use")) {
+    setSnackbarMessage(
+     "The email you entered is already in use. Please use a different email or login."
+    );
+   }
   } else {
+   setSnackbarMessage("Sign-up successful! Check email for verification link.");
+   setShowSnackbar(true);
   }
  };
 
@@ -54,6 +69,11 @@ function SignUp() {
      Already have an account? Login
     </Link>
    </form>
+   <Snackbar
+    message={snackbarMessage}
+    show={showSnackbar}
+    setShow={setShowSnackbar}
+   />
   </div>
  );
 }
