@@ -1,4 +1,4 @@
-/* .tours-container {
+.tours-container {
  background-color: #181818;
  color: #ededed;
  padding: 30px;
@@ -131,7 +131,7 @@
  background-color: #181818;
  padding: 15px;
  border-radius: 8px;
- box-shadow: 0px 4px 10px rgba(164, 26, 26, 0.45); 
+ box-shadow: 0px 4px 10px rgba(164, 26, 26, 0.45); /* Increased shadow */
 }
 
 .guest-card-header,
@@ -149,11 +149,11 @@
  font-weight: 500;
 }
 
-.owner-status,
+/* .owner-status,
 .non-owner-status {
   font-size: 14px;
   color: #7d7d7d;
-} 
+} */
 
 .guest-card-body .guest-detail {
  font-size: 15px;
@@ -193,4 +193,3 @@
   clear: both;
  }
 }
- */
